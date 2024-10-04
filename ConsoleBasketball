@@ -1,0 +1,126 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+
+//void possesion(int&);
+void tipOff(int&);
+void possesion(int, int, int);
+
+int main() 
+
+{
+	srand(time(NULL));
+	// Variables
+	int score;
+	int playerScore;
+	int cpuScore;
+	int win;
+	string cpu;
+	string player;
+	string names[6] = { "Joe", "Chris", "Daniel", "Keith", "Tyler", "Matt" };
+	int picker = rand() % 6;
+	cpu = names[picker];	
+	int currentPlayer; // 0 will be Player 1 will be CPU
+	score = 0;
+	playerScore  = 0;
+	cpuScore = 0;
+	win = 0;
+
+	// Console Prompts
+	cout << "What is Your Name ?" << endl;
+	cin >> player;
+	cout << "Welcome " << player << " You Will be Playing " << cpu << endl <<endl;
+	
+	tipOff(currentPlayer);
+	possesion(currentPlayer,playerScore,cpuScore);
+
+	return 0;
+}
+
+// Passes CurrentPlayer by Refrence and decides who wins TipOff
+void tipOff(int &currentplayer)
+
+{
+	currentplayer = rand() % 1;
+	if (currentplayer == 0)
+		cout << "You Won the Tip Off " << endl << endl;
+	else
+		cout << "You Lost the Tip Off" << endl << endl;
+
+}
+
+// You will pass current player and player and cpu and calculate plays here 
+// Prompt user to shoot 3 or dunk or layup 1 2 or 3 
+// random num generator to predict completed or Turnover
+
+void possesion(int currentPlayer, int playerScore, int cpuScore)
+
+{
+	srand(time(NULL));
+	int chance;
+	int choice;
+	choice = 0;
+	chance = 0;
+	while (playerScore || cpuScore <= 21) {
+		if (currentPlayer == 0)  // If Player has Ball 
+		{
+			cout << "Would you like to shoot a 3 ,Shoot a Layup or attempt a Dunk ?" << endl << "Type 1 for 3 Point Shot" << endl << "Type 2 for a Layup" << endl << "Type 3 for a Dunk" << endl << endl;
+			cin >> choice;
+			if (choice == 1) // If you pick 3 Pointer 
+			{
+				int chance = rand() % 4;
+				if (chance > 2) { // Determines if you make the shot or not 
+
+					playerScore = playerScore + 3;
+					cout << "Nothing But Net !!!" << endl << endl;
+					cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl;
+				}
+				else { // Determine Who gets the rebopund from the missed shot 
+					cout << "Brick !! You Missed the Shot " << endl << endl;
+					int chance = rand() % 6;
+					if (chance > 5) {
+						cout << "Player Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+					}
+					else {
+						currentPlayer = 1;
+						cout << "CPU grabbed rebound " << endl << endl; // Send Player and CPU Names 
+					}
+				}
+
+			}
+		}
+		if (currentPlayer == 1)
+		{
+			int chance = rand() % 6; // CPU possesion 
+
+			chance = rand() % 3;
+			if (choice == 1) 
+			{
+				int chance = rand() % 4;
+				if (chance > 2) { // Determines if you make the shot or not 
+
+					cpuScore = cpuScore + 3;
+					cout << "CPU shoots a 3 Nothing But Net !!!" << endl << endl;
+					cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl << endl;
+				}
+				else { // Determine Who gets the rebopund from the missed shot 
+					cout << "CPU misses the 3 pointer  " << endl << endl;
+					int chance = rand() % 6;
+					if (chance > 5) {
+						cout << "CPU Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+					}
+					else {
+						currentPlayer = 0;
+						cout << "Player grabbed rebound " << endl << endl; // Send Player and CPU Names 
+					}
+				}
+
+			}
+		}
+	}
+}
