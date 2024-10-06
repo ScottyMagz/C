@@ -7,7 +7,7 @@ using namespace std;
 
 //void possesion(int&);
 void tipOff(int&);
-void possesion(int, int, int);
+void possesion(int, int, int, string, string);
 
 int main() 
 
@@ -35,7 +35,7 @@ int main()
 	cout << "Welcome " << player << " You Will be Playing " << cpu << endl <<endl;
 	
 	tipOff(currentPlayer);
-	possesion(currentPlayer,playerScore,cpuScore);
+	possesion(currentPlayer,playerScore,cpuScore,player,cpu);
 
 	return 0;
 }
@@ -56,7 +56,7 @@ void tipOff(int &currentplayer)
 // Prompt user to shoot 3 or dunk or layup 1 2 or 3 
 // random num generator to predict completed or Turnover
 
-void possesion(int currentPlayer, int playerScore, int cpuScore)
+void possesion(int currentPlayer, int playerScore, int cpuScore,string player, string cpu)
 
 {
 	srand(time(NULL));
@@ -64,7 +64,10 @@ void possesion(int currentPlayer, int playerScore, int cpuScore)
 	int choice;
 	choice = 0;
 	chance = 0;
-	while (playerScore || cpuScore <= 21) {
+	while (playerScore <= 21 && cpuScore <= 21) 
+	
+	{
+
 		if (currentPlayer == 0)  // If Player has Ball 
 		{
 			cout << "Would you like to shoot a 3 ,Shoot a Layup or attempt a Dunk ?" << endl << "Type 1 for 3 Point Shot" << endl << "Type 2 for a Layup" << endl << "Type 3 for a Dunk" << endl << endl;
@@ -82,45 +85,147 @@ void possesion(int currentPlayer, int playerScore, int cpuScore)
 					cout << "Brick !! You Missed the Shot " << endl << endl;
 					int chance = rand() % 6;
 					if (chance > 5) {
-						cout << "Player Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+						cout << player << " Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
 
 					}
 					else {
 						currentPlayer = 1;
-						cout << "CPU grabbed rebound " << endl << endl; // Send Player and CPU Names 
+						cout << cpu << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
 					}
 				}
 
 			}
 		}
+
+
+
+
+		if (choice == 2) // If you pick 3 Pointer 
+		{
+			int chance = rand() % 4;
+			if (chance > 1) { // Determines if you make the shot or not 
+
+				playerScore = playerScore + 2;
+				cout << "Layup !" << endl << endl;
+				cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl;
+			}
+			else { // Determine Who gets the rebopund from the missed shot 
+				cout << "Brick !! You Missed the Shot " << endl << endl;
+				int chance = rand() % 6;
+				if (chance > 4) {
+					cout << player << " Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+				}
+				else {
+					currentPlayer = 1;
+					cout << cpu << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
+				}
+			}
+		}
+		if (choice == 3) // If you pick 3 Pointer 
+		{
+			int chance = rand() % 8;
+			if (chance > 1) { // Determines if you make the shot or not 
+
+				playerScore = playerScore + 2;
+				cout << "SLAM DUNK !!!" << endl << endl;
+				cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl;
+			}
+			else { // Determine Who gets the rebopund from the missed shot 
+				cout << "Brick !! You Missed the Dunk " << endl << endl;
+				int chance = rand() % 2;
+				if (chance > 1) {
+					cout << player << " Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+				}
+				else {
+					currentPlayer = 1;
+					cout << cpu << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
+				}
+			}
+		}
+
 		if (currentPlayer == 1)
 		{
 			int chance = rand() % 6; // CPU possesion 
 
 			chance = rand() % 3;
-			if (choice == 1) 
+			if (choice == 1)
 			{
 				int chance = rand() % 4;
 				if (chance > 2) { // Determines if you make the shot or not 
 
 					cpuScore = cpuScore + 3;
-					cout << "CPU shoots a 3 Nothing But Net !!!" << endl << endl;
+					cout << cpu << " shoots a 3 Nothing But Net !!!" << endl << endl;
 					cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl << endl;
 				}
 				else { // Determine Who gets the rebopund from the missed shot 
 					cout << "CPU misses the 3 pointer  " << endl << endl;
 					int chance = rand() % 6;
 					if (chance > 5) {
-						cout << "CPU Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+						cout << cpu <<" Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
 
 					}
 					else {
 						currentPlayer = 0;
-						cout << "Player grabbed rebound " << endl << endl; // Send Player and CPU Names 
+						cout << player << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
 					}
 				}
 
 			}
 		}
+		if (choice == 2) // If you pick 3 Pointer 
+		{
+			int chance = rand() % 4;
+			if (chance > 1) { // Determines if you make the shot or not 
+
+				cpuScore = cpuScore + 2;
+				cout << "Layup !" << endl << endl;
+				cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl;
+			}
+			else { // Determine Who gets the rebopund from the missed shot 
+				cout << "Brick !! CPU Missed the Shot " << endl << endl;
+				int chance = rand() % 6;
+				if (chance > 4) {
+					cout << cpu << " Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+				}
+				else {
+					currentPlayer = 0;
+					cout << player << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
+				}
+			}
+		}
+		if (choice == 3) // If you pick 3 Pointer 
+		{
+			int chance = rand() % 8;
+			if (chance > 1) { // Determines if you make the shot or not 
+
+				cpuScore = cpuScore + 2;
+				cout << cpu << " SLAM DUNK !!!" << endl << endl;
+				cout << "PlayerScore " << playerScore << " CPU Score " << cpuScore << endl;
+			}
+			else { // Determine Who gets the rebopund from the missed shot 
+				cout << "Brick !! CPU Missed the Dunk " << endl << endl;
+				int chance = rand() % 2;
+				if (chance > 1) {
+					cout << cpu << " Grabbed Rebound " << endl << endl; // Send Player and CPU Names 
+
+				}
+				else {
+					currentPlayer = 0;
+					cout << player << " grabbed rebound " << endl << endl; // Send Player and CPU Names 
+				}
+			}
+		}
 	}
+
+	if (playerScore > cpuScore) 
+		cout << "The Winner is " << player << endl;
+	
+	else
+		cout << "The Winner is " << cpu << endl;
+		
+
+
 }
