@@ -1,28 +1,31 @@
+#include "rectangleType.h"
 #include <iostream>
-#include "clockType.h"
+
 
 using namespace std;
 
 
 
-int main()
+int main() 
 
 {
-	int hr;
-	int min;
-	int sec;
+	double l;
+	double w;
+	double area;
 
-	hr = 0;
-	min = 0;
-	sec = 0;
-
-	clockType myClock;
-	myClock.getTime(hr, min, sec);
-	myClock.setTime(hr, min, sec);
-	myClock.printTime();
-	myClock.incHr(hr);
-	myClock.printTime();
+	
+	l = 25.0;
+	w = 25.0;
+	area = 0.0;
 
 
+	rectangleType newTrangle;
+	newTrangle.setDimension(l, w);
+	newTrangle.print();
+	area = newTrangle.area();
+	cout << "Area: " << area << endl;
 
+
+
+	return 0;
 }
